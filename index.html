@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#14242c">
+  <title>The Motion Thief — A museum heist</title>
+  <meta name="description" content="Steal movement itself in a complete 3D museum heist. Freeze a bridge, borrow a sculpture's rise, move an entire cage, and set the last motion free.">
+  <link rel="icon" type="image/svg+xml" href="./assets/icon.svg"><link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<div id="app">
+  <header class="header"><a class="brand" href="./" aria-label="The Motion Thief home"><span class="mark" aria-hidden="true">M<span>↗</span>T</span><span>THE MOTION THIEF<small>AN AFTER-HOURS MUSEUM HEIST</small></span></a><div class="header-actions"><button id="audio" class="plain" aria-pressed="false">Sound off</button><button id="help" class="square" aria-label="How to play">?</button><button id="pause" class="square" disabled aria-label="Pause game">Ⅱ</button></div></header>
+  <main class="workspace">
+    <section class="arena" id="arena" aria-label="Museum chamber">
+      <canvas id="world" tabindex="0" aria-label="3D museum. Walk with WASD or arrow keys. Click an exhibit or press its number to steal or give motion. Q and E turn the view. Z undoes a theft. R resets the chamber."></canvas>
+      <div class="room-heading" id="room-heading" hidden><span class="room-number" id="room-number">01</span><div><span class="kicker" id="room-wing"></span><h1 id="room-name"></h1><p id="objective"></p></div></div>
+      <div id="view-controls" class="view-controls" hidden><button id="rotate-left" aria-label="Rotate view left (Q)">↶</button><button id="rotate-right" aria-label="Rotate view right (E)">↷</button><span></span><button id="zoom-out" aria-label="Zoom out">−</button><button id="zoom-in" aria-label="Zoom in">+</button></div>
+      <div id="exit-tag" class="exit-tag" hidden>EXIT ↑</div>
+      <div id="object-tag" class="object-tag" hidden></div>
+      <div id="message" class="message" role="status" aria-live="polite"></div>
+      <div class="joystick" id="joystick" hidden aria-label="Touch movement control"><span class="joystick-ring"></span><span id="stick" class="stick"></span><span class="joystick-label">WALK</span></div>
+      <div id="entry-card" class="entry-card" hidden><span class="kicker" id="entry-wing"></span><p id="entry-copy"></p></div>
+      <div id="curtain" class="curtain" aria-hidden="true"></div>
+    </section>
+    <aside id="sidebar" class="sidebar" hidden>
+      <div id="pocket" class="pocket"><div class="pocket-head"><span class="kicker">YOUR ONE EMPTY HAND</span><span id="pocket-symbol">—</span></div><canvas id="motion-preview" width="220" height="58" aria-hidden="true"></canvas><h2 id="motion-name">Nothing stolen. Yet.</h2><p id="motion-origin">Click an orange exhibit to take its motion.</p></div>
+      <div class="exhibits"><p class="kicker exhibit-heading">TOUCH THE EXHIBITS</p><div id="exhibit-list"></div></div>
+      <div class="sidebar-bottom"><span class="kicker">MOTION IS CONSERVED.</span><p>Taking stops the source.<br>Giving changes the destination.</p></div>
+    </aside>
+  </main>
+  <footer id="controls" class="controls" hidden><div class="control-guide"><span><kbd>WASD</kbd> walk</span><span><kbd>1–4</kbd> take / give</span><span><kbd>Q E</kbd> turn view</span></div><div class="footer-actions"><button id="undo">↶ <span>Undo</span><kbd>Z</kbd></button><button id="hint">A little help <kbd>H</kbd></button><button id="reset">Reset room <kbd>R</kbd></button><span id="notes-count" class="kicker">0 NOTES</span></div></footer>
+
+  <section id="cover" class="cover" aria-label="Game start screen">
+    <div class="cover-copy"><div class="cover-top"><span class="kicker">THE MUSEUM CLOSES AT SIX.</span><span class="cover-stamp">ADMIT ONE<br>UNINVITED GUEST</span></div><h1>THE<br>MOTION<br><span>THIEF.</span></h1><p class="cover-subtitle">Nothing here is yours.<br>Especially the way things move.</p><button class="primary" id="start">Enter after hours <span>↗</span></button><button class="continue" id="continue" hidden>Continue the heist →</button><div class="cover-bottom"><span>STEAL. SWAP. ESCAPE.</span><span>08 ROOMS<br>KEYBOARD + TOUCH</span></div></div>
+    <div class="cover-art"><img src="./assets/motion-study.webp" alt="A marble hand stealing an orange ribbon of movement from a mechanical bird."><div class="art-caption"><span>CAT. 001 / MOVEMENT, REMOVED</span><span>PLEASE DO NOT TOUCH.</span></div><span class="art-index" aria-hidden="true">001</span></div>
+  </section>
+
+  <section id="dialog" class="dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-title" hidden><div class="dialog-card"><span id="dialog-kicker" class="kicker"></span><h2 id="dialog-title"></h2><p id="dialog-copy"></p><div id="dialog-body"></div><div id="dialog-actions"></div></div></section>
+  <div id="fatal" class="fatal" role="alert" hidden><h2>The museum could not open.</h2><p id="fatal-copy">Please reload the page.</p><button onclick="location.reload()">Try again</button></div>
+</div>
+<noscript><p class="fatal">This game needs JavaScript enabled. There is no installation or account required.</p></noscript>
+<script type="module" src="./game.js"></script>
+</body>
+</html>
